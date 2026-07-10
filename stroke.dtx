@@ -98,9 +98,11 @@
 \ProcessPgfPackageOptions{/stroke}
 %    \end{macrocode}
 
-% Then, we include the \href{https://ctan.org/pkg/tikz}{tikz} package:
+% Then, we include the \href{https://ctan.org/pkg/tikz}{tikz} package,
+% together with the decorations library that draws the random steps:
 %    \begin{macrocode}
 \RequirePackage{tikz}
+\usetikzlibrary{calc,decorations.pathmorphing}
 %    \end{macrocode}
 
 % \begin{macro}{\stoke}
