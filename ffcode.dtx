@@ -1,0 +1,110 @@
+% \iffalse meta-comment
+% SPDX-FileCopyrightText: Copyright (c) 2021-2026 Yegor Bugayenko
+% SPDX-License-Identifier: MIT
+% \fi
+
+% \CheckSum{0}
+%
+% \CharacterTable
+%  {Upper-case    \A\B\C\D\E\F\G\H\I\J\K\L\M\N\O\P\Q\R\S\T\U\V\W\X\Y\Z
+%   Lower-case    \a\b\c\d\e\f\g\h\i\j\k\l\m\n\o\p\q\r\s\t\u\v\w\x\y\z
+%   Digits        \0\1\2\3\4\5\6\7\8\9
+%   Exclamation   \!     Double quote  \"     Hash (number) \#
+%   Dollar        \$     Percent       \%     Ampersand     \&
+%   Acute accent  \'     Left paren    \(     Right paren   \)
+%   Asterisk      \*     Plus          \+     Comma         \,
+%   Minus         \-     Point         \.     Solidus       \/
+%   Colon         \:     Semicolon     \;     Less than     \<
+%   Equals        \=     Greater than  \>     Question mark \?
+%   Commercial at \@     Left bracket  \[     Backslash     \\
+%   Right bracket \]     Circumflex    \^     Underscore    \_
+%   Grave accent  \`     Left brace    \{     Vertical bar  \|
+%   Right brace   \}     Tilde         \~}
+
+% \GetFileInfo{stroke.dtx}
+% \DoNotIndex{\endgroup,\begingroup,\let,\else,\fi,\newcommand,\newenvironment}
+
+% \iffalse
+%<*driver>
+\ProvidesFile{stroke.dtx}
+%</driver>
+%<package>\NeedsTeXFormat{LaTeX2e}
+%<package>\ProvidesPackage{stroke}
+%<*package>
+[0000-00-00 0.0.0 Hand-Written Underline]
+%</package>
+%<*driver>
+\documentclass{ltxdoc}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+\usepackage{microtype}
+\AddToHook{env/verbatim/begin}{\microtypesetup{protrusion=false}}
+\usepackage{href-ul}
+\usepackage{stroke}
+\usepackage{amsmath}
+\usepackage{multicol}
+\usepackage{xcolor}
+\usepackage[dtx,runs=2]{docshots}
+\PageIndex
+\EnableCrossrefs
+\CodelineIndex
+\RecordChanges
+\begin{document}
+	\DocInput{stroke.dtx}
+	\PrintChanges
+	\PrintIndex
+\end{document}
+%</driver>
+% \fi
+
+% \title{|stroke|: \LaTeX{} Package \\ for Hand-Written Underline\thanks{The sources are in GitHub at \href{https://github.com/yegor256/stroke}{yegor256/stroke}}}
+% \author{Yegor Bugayenko \\ \texttt{yegor256@gmail.com}}
+% \date{\filedate, \fileversion}
+%
+% \maketitle
+%
+% \section{Introduction}
+%
+% This package provides a command that immitates hand-written underline:
+% \begin{docshot}
+% \documentclass{article}
+% \usepackage{stroke}
+% \pagestyle{empty}
+% \begin{document}
+% Don't forget \stroke{this}
+% and \stroke{that}!
+% \end{document}
+% \end{docshot}
+
+% \DescribeMacro{\stroke}
+% The |\stroke| command is similar to |\ul|, but the line it draws
+% looks like a hand-written one.
+
+% \StopEventually{}
+
+% \section{Implementation}
+% \changes{v0.1.0}{2021/06/10}{Initial version}
+
+% First, we include the \href{https://ctan.org/pkg/tikz}{tikz} package:
+%    \begin{macrocode}
+\RequirePackage{tikz}
+%    \end{macrocode}
+
+% \begin{macro}{\stoke}
+% Then, we define the |\stroke| command:
+%    \begin{macrocode}
+\makeatother
+%    \end{macrocode}
+% \end{macro}
+
+%    \begin{macrocode}
+\endinput
+%    \end{macrocode}
+
+% \Finale
+
+%\clearpage
+%
+%\PrintChanges
+%\clearpage
+%\PrintIndex

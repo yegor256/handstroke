@@ -1,0 +1,20 @@
+# SPDX-FileCopyrightText: Copyright (c) 2021-2026 Yegor Bugayenko
+# SPDX-License-Identifier: MIT
+---
+# yamllint disable rule:line-length
+docker:
+  image: yegor256/latex
+install: |-
+  sudo /usr/bin/update-depends.sh "$(pwd)/DEPENDS.txt"
+merge:
+  script: |-
+    l3build check
+release:
+  pre: false
+  script: |-
+    l3build tag ${tag}
+    l3build ctan --show-log-on-error
+    texsc
+    texqc
+    git commit -am "version set to ${tag}"
+    echo 'y' | l3build upload --halt-on-error
