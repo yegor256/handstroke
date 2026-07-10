@@ -1,6 +1,6 @@
 hard fancyvrb
+hard pgf
 hard pgfopts
-hard tikz
 hard tools
 hard xcolor
 soft docshots
