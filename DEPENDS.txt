@@ -1,7 +1,7 @@
 hard fancyvrb
-hard listings
 hard pgfopts
-hard tcolorbox
+hard tikz
+hard tools
 hard xcolor
 soft docshots
 soft environ
@@ -18,6 +18,5 @@ soft pdfcrop
 soft pgf
 soft scheme-basic
 soft silence
-hard tools
 soft upquote
 soft xetex
