@@ -65,7 +65,12 @@
 %
 % \section{Introduction}
 %
-% This package provides a command that immitates hand-written underline:
+% A plain, ruler-straight underline blends into the text and is
+% easy to miss. This package draws the line as if it were sketched
+% by hand: it wavers a little, stands apart from the typeset
+% letters, and catches the reader's eye where an ordinary rule
+% would go unnoticed. Reach for the |\stroke| command whenever a
+% word or a phrase truly deserves attention:
 % \begin{docshot}
 % \documentclass{article}
 % \usepackage[paperwidth=3in]{geometry}
@@ -79,8 +84,15 @@
 % \end{docshot}
 
 % \DescribeMacro{\stroke}
-% The |\stroke| command is similar to |\ul|, but the line it draws
-% looks like a hand-written one.
+% The |\stroke| command takes a single argument and underlines it,
+% much like the familiar |\ul|. The only difference is the shape of
+% the line: instead of a straight rule, |\stroke| sketches an
+% uneven stroke that looks hand-drawn and stands out on the page.
+%
+% By default the stroke is drawn in gray. Load the package with the
+% |colored| option to paint it in color instead, and pass
+% |color=|\meta{name} to choose which one (|orange| by default), as
+% in |\usepackage[colored, color=red]{stroke}|.
 
 % \StopEventually{}
 
@@ -100,15 +112,20 @@
 \ProcessPgfPackageOptions{/stroke}
 %    \end{macrocode}
 
-% Then, we include the \href{https://ctan.org/pkg/tikz}{tikz} package,
-% together with the decorations library that draws the random steps:
+% Then, we load the \href{https://ctan.org/pkg/tikz}{tikz} package,
+% together with the |calc| and |decorations.pathmorphing| libraries
+% that provide the coordinate arithmetic and the random-steps
+% decoration used below:
 %    \begin{macrocode}
 \RequirePackage{tikz}
 \usetikzlibrary{calc,decorations.pathmorphing}
 %    \end{macrocode}
 
-% \begin{macro}{\stoke}
-% Then, we define the |\stroke| command:
+% \begin{macro}{\stroke}
+% Finally, we define the |\stroke| command itself. It typesets its
+% argument inside a |tikz| node and then draws a wavering
+% rectangle path just beneath the baseline, so that only the lower
+% edge shows and reads as an underline:
 %    \begin{macrocode}
 \makeatletter
 \newcommand\stroke[1]{%
