@@ -21,15 +21,15 @@
 %   Grave accent  \`     Left brace    \{     Vertical bar  \|
 %   Right brace   \}     Tilde         \~}
 
-% \GetFileInfo{stroke.dtx}
+% \GetFileInfo{handstroke.dtx}
 % \DoNotIndex{\endgroup,\begingroup,\let,\else,\fi,\newcommand,\newenvironment}
 
 % \iffalse
 %<*driver>
-\ProvidesFile{stroke.dtx}
+\ProvidesFile{handstroke.dtx}
 %</driver>
 %<package>\NeedsTeXFormat{LaTeX2e}
-%<package>\ProvidesPackage{stroke}
+%<package>\ProvidesPackage{handstroke}
 %<*package>
 [0000-00-00 0.0.0 Hand-Written Underline]
 %</package>
@@ -40,7 +40,7 @@
 \usepackage{microtype}
 \AddToHook{env/verbatim/begin}{\microtypesetup{protrusion=false}}
 \usepackage{href-ul}
-\usepackage{stroke}
+\usepackage{handstroke}
 \usepackage{amsmath}
 \usepackage{multicol}
 \usepackage{xcolor}
@@ -50,14 +50,14 @@
 \CodelineIndex
 \RecordChanges
 \begin{document}
-	\DocInput{stroke.dtx}
+	\DocInput{handstroke.dtx}
 	\PrintChanges
 	\PrintIndex
 \end{document}
 %</driver>
 % \fi
 
-% \title{|stroke|: \LaTeX{} Package \\ for Hand-Written Underline\thanks{The sources are in GitHub at \href{https://github.com/yegor256/stroke}{yegor256/stroke}}}
+% \title{|handstroke|: \LaTeX{} Package \\ for Hand-Written Underline\thanks{The sources are in GitHub at \href{https://github.com/yegor256/handstroke}{yegor256/handstroke}}}
 % \author{Yegor Bugayenko \\ \texttt{yegor256@gmail.com}}
 % \date{\filedate, \fileversion}
 %
@@ -69,30 +69,30 @@
 % easy to miss. This package draws the line as if it were sketched
 % by hand: it wavers a little, stands apart from the typeset
 % letters, and catches the reader's eye where an ordinary rule
-% would go unnoticed. Reach for the |\stroke| command whenever a
+% would go unnoticed. Reach for the |\handstroke| command whenever a
 % word or a phrase truly deserves attention:
 % \begin{docshot}
 % \documentclass{article}
 % \usepackage[paperwidth=3in]{geometry}
-% \usepackage[colored]{stroke}
+% \usepackage[colored]{handstroke}
 % \pagestyle{empty}
 % \begin{document}
-% Don't forget to \stroke{encrypt}
+% Don't forget to \handstroke{encrypt}
 % the data before sending them over
-% the network, it's \stroke{important}!
+% the network, it's \handstroke{important}!
 % \end{document}
 % \end{docshot}
 
-% \DescribeMacro{\stroke}
-% The |\stroke| command takes a single argument and underlines it,
+% \DescribeMacro{\handstroke}
+% The |\handstroke| command takes a single argument and underlines it,
 % much like the familiar |\ul|. The only difference is the shape of
-% the line: instead of a straight rule, |\stroke| sketches an
-% uneven stroke that looks hand-drawn and stands out on the page.
+% the line: instead of a straight rule, |\handstroke| sketches an
+% uneven handstroke that looks hand-drawn and stands out on the page.
 %
-% By default the stroke is drawn in gray. Load the package with the
+% By default the handstroke is drawn in gray. Load the package with the
 % |colored| option to paint it in color instead, and pass
 % |color=|\meta{name} to choose which one (|orange| by default), as
-% in |\usepackage[colored, color=red]{stroke}|.
+% in |\usepackage[colored, color=red]{handstroke}|.
 
 % \StopEventually{}
 
@@ -103,13 +103,13 @@
 %    \begin{macrocode}
 \RequirePackage{pgfopts}
 \pgfkeys{
-  /stroke/.cd,
-  colored/.store in=\stroke@colored,
-  color/.store in=\stroke@color,
+  /handstroke/.cd,
+  colored/.store in=\handstroke@colored,
+  color/.store in=\handstroke@color,
   color/.default=orange,
   color,
 }
-\ProcessPgfPackageOptions{/stroke}
+\ProcessPgfPackageOptions{/handstroke}
 %    \end{macrocode}
 
 % Then, we load the \href{https://ctan.org/pkg/tikz}{tikz} package,
@@ -122,15 +122,15 @@
 \usetikzlibrary{decorations.pathmorphing}
 %    \end{macrocode}
 
-% \begin{macro}{\stroke}
-% Finally, we define the |\stroke| command itself. It typesets its
+% \begin{macro}{\handstroke}
+% Finally, we define the |\handstroke| command itself. It typesets its
 % argument inside a |tikz| node and then draws a wavering
 % rectangle path just beneath the baseline, so that only the lower
 % edge shows and reads as an underline:
 %    \begin{macrocode}
 \makeatletter
-\newcommand\stroke[1]{%
-  \ifdefined\stroke@colored\let\stroke@ink\stroke@color\else\def\stroke@ink{gray!80}\fi
+\newcommand\handstroke[1]{%
+  \ifdefined\handstroke@colored\let\handstroke@ink\handstroke@color\else\def\handstroke@ink{gray!80}\fi
   \tikz[baseline=(text.base)] {
     \node[inner sep=0em, outer sep=0em] (text) {#1};
     \begin{scope}
@@ -142,7 +142,7 @@
         line join=round,
         line cap=round,
         line width=.08em,
-        draw=\stroke@ink]
+        draw=\handstroke@ink]
         ($(text.west) + (-0.2em, -.46em)$)
         rectangle
         ($(text.east) + (+0.2em, -.46em)$);

@@ -3,11 +3,11 @@
 
 \input{regression-test.tex}
 \documentclass{article}
-\usepackage{stroke}
+\usepackage{handstroke}
 \begin{document}
 
 \START
 
-This is to \stroke{highlight}.
+This is to \handstroke{highlight}.
 
 \END

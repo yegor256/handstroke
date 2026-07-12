@@ -25,7 +25,7 @@ _minted-*
 *.toc
 *.zip
 build/
-stroke-ctan.curlopt
+handstroke-ctan.curlopt
 node_modules/
 package/
 target/
