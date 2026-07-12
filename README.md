@@ -5,7 +5,7 @@
 [![License](https://img.shields.io/badge/license-MIT-green.svg)](https://github.com/yegor256/handstroke/blob/master/LICENSE.txt)
 
 This LaTeX package helps you underline a piece of text.
-The package uses [`tikz`](https://ctan.org/pkg/tika) package.
+The package uses [pgf] package.
 
 First, [install it] from [CTAN] and then use in the preamble:
 
@@ -29,3 +29,4 @@ If the build is still clean, submit a pull request.
 [install it]: https://en.wikibooks.org/wiki/LaTeX/Installing_Extra_Packages
 [CTAN]: https://ctan.org/pkg/handstroke
 [handstroke.sty]: https://yegor256.github.io/handstroke/handstroke.sty
+[pgf]: https://ctan.org/pkg/pgf
