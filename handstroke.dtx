@@ -93,6 +93,22 @@
 % |colored| option to paint it in color instead, and pass
 % |color=|\meta{name} to choose which one (|orange| by default), as
 % in |\usepackage[colored, color=red]{handstroke}|.
+%
+% A single stroke may also be recolored on its own, without touching the
+% rest of the document, by giving |\handstroke| an optional
+% |color=|\meta{name} argument. This overrides both the gray default and
+% whatever the package-wide |color| option asked for, but only for that
+% one line:
+% \begin{docshot}
+% \documentclass{article}
+% \usepackage[paperwidth=3in]{geometry}
+% \usepackage{handstroke}
+% \pagestyle{empty}
+% \begin{document}
+% This word is \handstroke[color=red]{urgent},
+% while this one is \handstroke[color=blue]{calm}.
+% \end{document}
+% \end{docshot}
 
 % \section{Package Options}
 
@@ -111,6 +127,9 @@
 % \changes{v0.2.0}{2025/07/12}{The package was renamed fro \texttt{stroke}
 % to \texttt{handstroke} for the sake
 % of disambiguation and bettter clarity.}
+% \changes{v0.3.0}{2026/07/12}{The \texttt{color} option can now be passed
+% to the \texttt{\textbackslash handstroke} command to recolor a single
+% line.}
 
 % First, we parse package options:
 %    \begin{macrocode}
@@ -149,15 +168,22 @@
 % Finally, we define the |\handstroke| command itself. It typesets its
 % argument inside a |tikz| node and then draws a wavering
 % rectangle path just beneath the baseline, so that only the lower
-% edge shows and reads as an underline:
+% edge shows and reads as an underline. The optional first argument
+% accepts a |color=|\meta{name} key that overrides the ink for this one
+% stroke only:
 %    \begin{macrocode}
 \makeatletter
-\newcommand\handstroke[1]{%
+\pgfkeys{
+  /handstroke/stroke/.cd,
+  color/.store in=\handstroke@ink,
+}
+\newcommand\handstroke[2][]{%
   \ifdefined\handstroke@colored%
     \let\handstroke@ink\handstroke@color%
   \else\def\handstroke@ink{gray!80}\fi%
+  \pgfkeys{/handstroke/stroke/.cd, #1}%
   \tikz[baseline=(text.base)] {
-    \node[inner sep=0em, outer sep=0em] (text) {#1};
+    \node[inner sep=0em, outer sep=0em] (text) {#2};
     \begin{scope}
       \path[use as bounding box]
         (text.east) rectangle (text.west);
