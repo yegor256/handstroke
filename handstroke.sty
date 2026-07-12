@@ -31,7 +31,7 @@
 
 \NeedsTeXFormat{LaTeX2e}
 \ProvidesPackage{handstroke}
-[2026-07-12 05.40.40 Hand-Written Underline]
+[2026-07-12 05.45.18 Hand-Written Underline]
 
 
 
@@ -61,12 +61,17 @@
 \usetikzlibrary{decorations.pathmorphing}
 
 \makeatletter
-\newcommand\handstroke[1]{%
+\pgfkeys{
+  /handstroke/stroke/.cd,
+  color/.store in=\handstroke@ink,
+}
+\newcommand\handstroke[2][]{%
   \ifdefined\handstroke@colored%
     \let\handstroke@ink\handstroke@color%
   \else\def\handstroke@ink{gray!80}\fi%
+  \pgfkeys{/handstroke/stroke/.cd, #1}%
   \tikz[baseline=(text.base)] {
-    \node[inner sep=0em, outer sep=0em] (text) {#1};
+    \node[inner sep=0em, outer sep=0em] (text) {#2};
     \begin{scope}
       \path[use as bounding box]
         (text.east) rectangle (text.west);
