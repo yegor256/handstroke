@@ -122,16 +122,32 @@
 % The |color| package option (|orange| by default) defines the color
 % of the line.
 
+% \DescribeMacro{synonym}
+% The |synonym| package option defines a shorter alias for the
+% |\handstroke| command, so that |\usepackage[synonym=hs]{handstroke}|
+% lets you write |\hs{word}| instead of |\handstroke{word}|:
+% \begin{docshot}
+% \documentclass{article}
+% \usepackage[paperwidth=10em]{geometry}
+% \usepackage[synonym=hs]{handstroke}
+% \pagestyle{empty}
+% \begin{document}\raggedright
+% How about \hs{this}?
+% \end{document}
+% \end{docshot}
+
 % \StopEventually{}
 
 % \section{Implementation}
 % \changes{v0.1.0}{2025/07/06}{Initial version}
 % \changes{v0.2.0}{2025/07/12}{The package was renamed fro \texttt{stroke}
 % to \texttt{handstroke} for the sake
-% of disambiguation and bettter clarity.}
+% of disambiguation and better clarity.}
 % \changes{v0.3.0}{2026/07/12}{The \texttt{color} option can now be passed
 % to the \texttt{\textbackslash handstroke} command to recolor a single
 % line.}
+% \changes{v0.4.0}{2026/07/12}{The \texttt{synonym} package option defines
+% a shorter alias for the \texttt{\textbackslash handstroke} command.}
 
 % First, we parse package options with the help of
 % the \href{https://ctan.org/pkg/pgfopts}{pgfopts} package:
@@ -143,6 +159,7 @@
   color/.store in=\handstroke@color,
   color/.default=orange,
   color,
+  synonym/.store in=\handstroke@synonym,
 }
 \ProcessPgfPackageOptions{/handstroke}
 %    \end{macrocode}
@@ -206,6 +223,16 @@
 \makeatother
 %    \end{macrocode}
 % \end{macro}
+
+% If the |synonym| package option is given, we let its value name a
+% shorter alias for the |\handstroke| command:
+%    \begin{macrocode}
+\makeatletter
+\ifdefined\handstroke@synonym
+  \expandafter\let\csname\handstroke@synonym\endcsname\handstroke
+\fi
+\makeatother
+%    \end{macrocode}
 
 %    \begin{macrocode}
 \endinput
