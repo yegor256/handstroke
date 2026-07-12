@@ -125,7 +125,16 @@
 % \DescribeMacro{synonym}
 % The |synonym| package option defines a shorter alias for the
 % |\handstroke| command, so that |\usepackage[synonym=hs]{handstroke}|
-% lets you write |\hs{word}| instead of |\handstroke{word}|.
+% lets you write |\hs{word}| instead of |\handstroke{word}|:
+% \begin{docshot}
+% \documentclass{article}
+% \usepackage[paperwidth=10em]{geometry}
+% \usepackage[synonym=hs]{handstroke}
+% \pagestyle{empty}
+% \begin{document}\raggedright
+% How about \hs{this}?
+% \end{document}
+% \end{docshot}
 
 % \StopEventually{}
 
