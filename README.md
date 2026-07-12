@@ -1,11 +1,14 @@
-# LaTeX command `\handstroke` to underline a text
+# LaTeX command `\handstroke` for a hand-written underline
 
 [![make](https://github.com/yegor256/handstroke/actions/workflows/l3build.yml/badge.svg)](https://github.com/yegor256/handstroke/actions/workflows/l3build.yml)
 [![CTAN](https://img.shields.io/ctan/v/handstroke)](https://ctan.org/pkg/handstroke)
 [![License](https://img.shields.io/badge/license-MIT-green.svg)](https://github.com/yegor256/handstroke/blob/master/LICENSE.txt)
 
-This LaTeX package helps you underline a piece of text.
-The package uses [pgf] package.
+A plain, ruler-straight underline blends into the text and is easy to miss.
+This LaTeX package underlines a word or a phrase with a line that looks
+  drawn by hand: it wavers a little, stands apart from the letters,
+  and catches the reader's eye where an ordinary rule would go unnoticed.
+The package draws the stroke with the [pgf] package.
 
 First, [install it] from [CTAN] and then use in the preamble:
 
