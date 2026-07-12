@@ -130,7 +130,9 @@
 %    \begin{macrocode}
 \makeatletter
 \newcommand\handstroke[1]{%
-  \ifdefined\handstroke@colored\let\handstroke@ink\handstroke@color\else\def\handstroke@ink{gray!80}\fi
+  \ifdefined\handstroke@colored%
+    \let\handstroke@ink\handstroke@color%
+  \else\def\handstroke@ink{gray!80}\fi%
   \tikz[baseline=(text.base)] {
     \node[inner sep=0em, outer sep=0em] (text) {#1};
     \begin{scope}
