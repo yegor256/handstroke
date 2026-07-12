@@ -1,10 +1,10 @@
 %%
-%% This is file `stroke.sty',
+%% This is file `handstroke.sty',
 %% generated with the docstrip utility.
 %%
 %% The original source files were:
 %%
-%% stroke.dtx  (with options: `package')
+%% handstroke.dtx  (with options: `package')
 %% (The MIT License)
 %% 
 %% Copyright (c) 2021-2026 Yegor Bugayenko
@@ -30,8 +30,8 @@
 
 
 \NeedsTeXFormat{LaTeX2e}
-\ProvidesPackage{stroke}
-[2026-07-11 06.04.57 Hand-Written Underline]
+\ProvidesPackage{handstroke}
+[2026-07-12 05.32.59 Hand-Written Underline]
 
 
 
@@ -39,21 +39,21 @@
 
 \RequirePackage{pgfopts}
 \pgfkeys{
-  /stroke/.cd,
-  colored/.store in=\stroke@colored,
-  color/.store in=\stroke@color,
+  /handstroke/.cd,
+  colored/.store in=\handstroke@colored,
+  color/.store in=\handstroke@color,
   color/.default=orange,
   color,
 }
-\ProcessPgfPackageOptions{/stroke}
+\ProcessPgfPackageOptions{/handstroke}
 
 \RequirePackage{tikz}
 \usetikzlibrary{calc}
 \usetikzlibrary{decorations.pathmorphing}
 
 \makeatletter
-\newcommand\stroke[1]{%
-  \ifdefined\stroke@colored\let\stroke@ink\stroke@color\else\def\stroke@ink{gray!80}\fi
+\newcommand\handstroke[1]{%
+  \ifdefined\handstroke@colored\let\handstroke@ink\handstroke@color\else\def\handstroke@ink{gray!80}\fi
   \tikz[baseline=(text.base)] {
     \node[inner sep=0em, outer sep=0em] (text) {#1};
     \begin{scope}
@@ -65,7 +65,7 @@
         line join=round,
         line cap=round,
         line width=.08em,
-        draw=\stroke@ink]
+        draw=\handstroke@ink]
         ($(text.west) + (-0.2em, -.46em)$)
         rectangle
         ($(text.east) + (+0.2em, -.46em)$);
@@ -76,4 +76,4 @@
 
 \endinput
 %%
-%% End of file `stroke.sty'.
+%% End of file `handstroke.sty'.
