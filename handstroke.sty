@@ -31,7 +31,7 @@
 
 \NeedsTeXFormat{LaTeX2e}
 \ProvidesPackage{handstroke}
-[2026-07-12 05.34.11 Hand-Written Underline]
+[2026-07-12 05.35.09 Hand-Written Underline]
 
 
 
@@ -53,7 +53,9 @@
 
 \makeatletter
 \newcommand\handstroke[1]{%
-  \ifdefined\handstroke@colored\let\handstroke@ink\handstroke@color\else\def\handstroke@ink{gray!80}\fi
+  \ifdefined\handstroke@colored%
+    \let\handstroke@ink\handstroke@color%
+  \else\def\handstroke@ink{gray!80}\fi%
   \tikz[baseline=(text.base)] {
     \node[inner sep=0em, outer sep=0em] (text) {#1};
     \begin{scope}
