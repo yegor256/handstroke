@@ -31,7 +31,9 @@
 
 \NeedsTeXFormat{LaTeX2e}
 \ProvidesPackage{handstroke}
-[2026-07-13 18.34.22 Hand-Written Underline]
+[2026-07-13 18.52.56 Hand-Written Underline]
+
+
 
 
 
@@ -42,13 +44,19 @@
 
 
 \RequirePackage{pgfopts}
+\def\handstroke@synonyms{}
 \pgfkeys{
   /handstroke/.cd,
   colored/.store in=\handstroke@colored,
   color/.store in=\handstroke@color,
   color/.default=orange,
   color,
-  synonym/.store in=\handstroke@synonym,
+  synonym/.code={%
+    \g@addto@macro\handstroke@synonyms{\handstroke@alias{#1}}},
+  emph/.style={synonym=emph},
+  emph/.default=,
+  ul/.style={synonym=ul},
+  ul/.default=,
 }
 \ProcessPgfPackageOptions{/handstroke}
 
@@ -93,9 +101,9 @@
 \makeatother
 
 \makeatletter
-\ifdefined\handstroke@synonym
-  \expandafter\let\csname\handstroke@synonym\endcsname\handstroke
-\fi
+\newcommand\handstroke@alias[1]{%
+  \expandafter\let\csname#1\endcsname\handstroke}
+\handstroke@synonyms
 \makeatother
 
 \endinput
