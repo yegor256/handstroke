@@ -137,6 +137,10 @@
 % How about \hs{this}?
 % \end{document}
 % \end{docshot}
+%
+% The chosen name need not be new. When it already belongs to an existing
+% command, such as |\emph|, that command is renewed to draw a handstroke,
+% rather than aborting with an error.
 
 % \StopEventually{}
 
@@ -149,7 +153,9 @@
 % to the \texttt{\textbackslash handstroke} command to recolor a single
 % line.}
 % \changes{v0.4.0}{2026/07/12}{The \texttt{synonym} package option defines
-% a shorter alias for the \texttt{\textbackslash handstroke} command.}
+% a shorter alias for the \texttt{\textbackslash handstroke} command,
+% renewing the target when it already exists, such as
+% \texttt{\textbackslash emph}.}
 
 % First, we parse package options with the help of
 % the \href{https://ctan.org/pkg/pgfopts}{pgfopts} package:
@@ -227,7 +233,9 @@
 % \end{macro}
 
 % If the |synonym| package option is given, we let its value name a
-% shorter alias for the |\handstroke| command:
+% shorter alias for the |\handstroke| command. Because |\let| overwrites
+% whatever meaning the name carried before, an existing command such as
+% |\emph| is renewed rather than aborting with an error:
 %    \begin{macrocode}
 \makeatletter
 \ifdefined\handstroke@synonym
