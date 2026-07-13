@@ -10,7 +10,6 @@ checkengines = {"pdftex", "luatex", "xetex"}
 
 uploadconfig = {
   pkg = "handstroke",
-  update = false,
   version = "0.0.0 0000-00-00",
   author = "Yegor Bugayenko",
   uploader = "Yegor Bugayenko",
