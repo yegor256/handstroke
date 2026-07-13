@@ -35,3 +35,33 @@ function update_tag(file, content, tagname, tagdate)
     "0000%-00%-00", os.date("%Y-%m-%d")
   )
 end
+
+-- Fail the build when the typesetting log reports a warning, since
+-- l3build otherwise swallows overfull boxes and package warnings.
+local pdftypeset = typeset
+function typeset(file, dir, exe)
+  local errorlevel = pdftypeset(file, dir, exe)
+  if errorlevel ~= 0 then
+    return errorlevel
+  end
+  local log = dir .. "/" .. jobname(file) .. ".log"
+  local handle = io.open(log, "r")
+  if not handle then
+    return 0
+  end
+  local warnings = 0
+  for line in handle:lines() do
+    if line:find("^Overfull") or line:find("^Underfull")
+      or line:find("Warning") then
+      print("! " .. line)
+      warnings = warnings + 1
+    end
+  end
+  handle:close()
+  if warnings > 0 then
+    print("Typesetting of " .. jobname(file) .. " left "
+      .. warnings .. " warning(s) unresolved")
+    return 1
+  end
+  return 0
+end

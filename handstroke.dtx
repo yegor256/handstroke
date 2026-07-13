@@ -23,6 +23,7 @@
 
 % \GetFileInfo{handstroke.dtx}
 % \DoNotIndex{\endgroup,\begingroup,\let,\else,\fi,\newcommand,\newenvironment}
+% \DoNotIndex{\ProcessPgfPackageOptions}
 
 % \iffalse
 %<*driver>
@@ -39,6 +40,7 @@
 \usepackage{lmodern}
 \usepackage{microtype}
 \AddToHook{env/verbatim/begin}{\microtypesetup{protrusion=false}}
+\PassOptionsToPackage{hyperindex=false}{hyperref}
 \usepackage{href-ul}
 \usepackage{handstroke}
 \usepackage{amsmath}
