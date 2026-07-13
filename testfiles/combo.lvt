@@ -1,0 +1,13 @@
+% SPDX-FileCopyrightText: Copyright (c) 2021-2026 Yegor Bugayenko
+% SPDX-License-Identifier: MIT
+
+\input{regression-test.tex}
+\documentclass{article}
+\usepackage[synonym=hs,ul,emph]{handstroke}
+\begin{document}
+
+\START
+
+How about \hs{this} and \ul{that} and \emph{those}?
+
+\END

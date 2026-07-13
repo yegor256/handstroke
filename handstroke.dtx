@@ -142,6 +142,17 @@
 % command, such as |\emph|, that command is renewed to draw a handstroke,
 % rather than aborting with an error.
 
+% \DescribeMacro{emph}
+% The |emph| package option is a shortcut for |synonym=emph|: it renews the
+% standard |\emph| command so that |\emph{word}| draws a handstroke.
+
+% \DescribeMacro{ul}
+% The |ul| package option is a shortcut for |synonym=ul|: it lets you write
+% |\ul{word}| in place of |\handstroke{word}|.
+%
+% They combine freely: |[synonym=hs,ul,emph]| makes |\hs|, |\ul| and
+% |\emph| all draw handstrokes at once.
+
 % \StopEventually{}
 
 % \section{Implementation}
@@ -156,18 +167,31 @@
 % a shorter alias for the \texttt{\textbackslash handstroke} command,
 % renewing the target when it already exists, such as
 % \texttt{\textbackslash emph}.}
+% \changes{v0.5.0}{2026/07/13}{The \texttt{emph} and \texttt{ul} package
+% options were added as shortcuts for \texttt{synonym=emph} and
+% \texttt{synonym=ul}, and several synonyms can now be combined in one load.}
 
 % First, we parse package options with the help of
-% the \href{https://ctan.org/pkg/pgfopts}{pgfopts} package:
+% the \href{https://ctan.org/pkg/pgfopts}{pgfopts} package. Every
+% |synonym| appends one more name to |\handstroke@synonyms|, so the
+% options accumulate and several aliases can be requested at once. The
+% |emph| and |ul| options are styles that expand to |synonym=emph| and
+% |synonym=ul|, sharing that same machinery:
 %    \begin{macrocode}
 \RequirePackage{pgfopts}
+\def\handstroke@synonyms{}
 \pgfkeys{
   /handstroke/.cd,
   colored/.store in=\handstroke@colored,
   color/.store in=\handstroke@color,
   color/.default=orange,
   color,
-  synonym/.store in=\handstroke@synonym,
+  synonym/.code={%
+    \g@addto@macro\handstroke@synonyms{\handstroke@alias{#1}}},
+  emph/.style={synonym=emph},
+  emph/.default=,
+  ul/.style={synonym=ul},
+  ul/.default=,
 }
 \ProcessPgfPackageOptions{/handstroke}
 %    \end{macrocode}
@@ -232,15 +256,15 @@
 %    \end{macrocode}
 % \end{macro}
 
-% If the |synonym| package option is given, we let its value name a
-% shorter alias for the |\handstroke| command. Because |\let| overwrites
-% whatever meaning the name carried before, an existing command such as
-% |\emph| is renewed rather than aborting with an error:
+% Once |\handstroke| exists, we walk the collected names and let each one
+% alias it. Because |\let| overwrites whatever meaning a name carried
+% before, an existing command such as |\emph| is renewed rather than
+% aborting with an error:
 %    \begin{macrocode}
 \makeatletter
-\ifdefined\handstroke@synonym
-  \expandafter\let\csname\handstroke@synonym\endcsname\handstroke
-\fi
+\newcommand\handstroke@alias[1]{%
+  \expandafter\let\csname#1\endcsname\handstroke}
+\handstroke@synonyms
 \makeatother
 %    \end{macrocode}
 

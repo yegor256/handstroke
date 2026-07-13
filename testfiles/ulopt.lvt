@@ -1,0 +1,13 @@
+% SPDX-FileCopyrightText: Copyright (c) 2021-2026 Yegor Bugayenko
+% SPDX-License-Identifier: MIT
+
+\input{regression-test.tex}
+\documentclass{article}
+\usepackage[ul]{handstroke}
+\begin{document}
+
+\START
+
+How about \ul{this}?
+
+\END
