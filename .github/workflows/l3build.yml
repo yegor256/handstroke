@@ -19,7 +19,7 @@ jobs:
         shell: bash
     strategy:
       matrix:
-        os: [ubuntu-24.04, macos-15, windows-2025]
+        os: [ubuntu-24.04, macos-26, windows-2025]
     steps:
       - uses: actions/checkout@v7
       - uses: actions/setup-python@v7
@@ -30,7 +30,7 @@ jobs:
           sudo apt-get install --yes ghostscript
         if: matrix.os == 'ubuntu-24.04'
       - run: brew install ghostscript
-        if: matrix.os == 'macos-15'
+        if: matrix.os == 'macos-26'
       - run: sed -E 's/^(hard|soft)[[:space:]]+//' DEPENDS.txt > .texlive-packages.txt
       - uses: zauguin/install-texlive@v4.5.0
         with:
